@@ -290,14 +290,8 @@
    async function fetchData() {
      pingStart = performance.now();
      try {
-      const res  = await fetch("/data");
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        elPing.textContent = (data && data.error === "NO_LIVE_DATA")
-          ? "NO LIVE DATA (waiting for Wokwi → /update)"
-          : "API ERROR";
-        return;
-      }
+       const res  = await fetch("/data");
+       const data = await res.json();
        const ping = Math.round(performance.now() - pingStart);
        elPing.textContent = `API PING: ${ping} ms`;
        updateUI(data);
