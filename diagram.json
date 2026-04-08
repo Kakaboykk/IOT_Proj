@@ -11,25 +11,11 @@
       "attrs": {}
     },
     {
-      "type": "wokwi-mpu6050",
-      "id": "imu1",
-      "top": 20,
-      "left": 20,
-      "attrs": { "label": "IMU-Above-Knee" }
-    },
-    {
-      "type": "wokwi-mpu6050",
-      "id": "imu2",
-      "top": 20,
-      "left": 500,
-      "attrs": { "label": "IMU-Below-Knee" }
-    },
-    {
       "type": "wokwi-led",
-      "id": "ledVibro",
+      "id": "ledRed",
       "top": 418.8,
       "left": 71.4,
-      "attrs": { "color": "red", "label": "Vibration Motor", "flip": "1" }
+      "attrs": { "color": "red", "label": "Under Target", "flip": "1" }
     },
     {
       "type": "wokwi-resistor",
@@ -58,14 +44,29 @@
       "type": "wokwi-led",
       "id": "ledYellow",
       "top": 418.8,
-      "left": 339.8,
+      "left": 281.8,
       "attrs": { "color": "yellow", "label": "Over Angle", "flip": "1" }
     },
     {
       "type": "wokwi-resistor",
       "id": "r3",
       "top": 500,
-      "left": 360,
+      "left": 320,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledStatus",
+      "top": 409.2,
+      "left": 388.2,
+      "attrs": { "color": "blue", "label": "Status", "flip": "1" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r4",
+      "top": 500,
+      "left": 420,
       "rotate": 90,
       "attrs": { "value": "220" }
     },
@@ -73,44 +74,26 @@
       "type": "wokwi-potentiometer",
       "id": "pot1",
       "top": 497.9,
-      "left": 499,
-      "attrs": { "label": "Flex Sensor (ADC)" }
+      "left": 550,
+      "attrs": { "label": "Simulated Knee Angle" }
     }
   ],
   "connections": [
-    ["esp32:3V3", "imu1:VCC", "red", []],
-    ["esp32:GND.1", "imu1:GND", "black", []],
-    ["esp32:21", "imu1:SDA", "green", []],
-    ["esp32:22", "imu1:SCL", "blue", []],
-    ["esp32:GND.1", "imu1:AD0", "black", []],
-    ["esp32:3V3", "imu2:VCC", "red", []],
-    ["esp32:GND.1", "imu2:GND", "black", []],
-    ["esp32:21", "imu2:SDA", "green", []],
-    ["esp32:22", "imu2:SCL", "blue", []],
-    ["esp32:3V3", "imu2:AD0", "red", []],
-    ["esp32:2", "ledVibro:A", "orange", []],
-    ["ledVibro:K", "r1:1", "orange", []],
-    ["r1:2", "esp32:GND.1", "black", []],
-    ["esp32:26", "ledGreen:A", "green", []],
-    ["ledGreen:K", "r2:1", "green", []],
-    ["r2:2", "esp32:GND.1", "black", []],
-    ["esp32:25", "ledYellow:A", "yellow", []],
-    ["ledYellow:K", "r3:1", "yellow", []],
-    ["r3:2", "esp32:GND.1", "black", []],
-    ["esp32:34", "pot1:SIG", "yellow", []],
     ["esp32:3V3", "pot1:VCC", "red", []],
     ["esp32:GND.1", "pot1:GND", "black", []],
-    ["esp32:D34", "pot1:SIG", "green", ["h-48", "v19"]],
-    ["ledVibro:C", "r1:1", "green", ["v0"]],
-    ["ledGreen:C", "r2:1", "green", ["v0"]],
-    ["ledYellow:C", "r3:1", "green", ["v0"]],
-    ["ledVibro:A", "esp32:D2", "green", ["v-48", "h124.8"]],
-    ["esp32:D26", "ledGreen:A", "green", ["h0"]],
-    ["esp32:D25", "ledYellow:A", "green", ["h0"]],
-    ["imu1:SCL", "esp32:D22", "green", ["v118.22", "h232", "v96"]],
-    ["imu1:SDA", "esp32:D21", "green", ["v22.22", "h116.8"]],
-    ["imu2:SCL", "esp32:D22", "green", ["v22.22", "h-248", "v38.4"]],
-    ["imu2:SDA", "esp32:D21", "green", ["v89.42", "h-171.2"]]
+    ["esp32:D34", "pot1:SIG", "purple", []],
+    ["esp32:D2", "ledRed:A", "green", []],
+    ["ledRed:C", "r1:1", "green", []],
+    ["r1:2", "esp32:GND.1", "black", []],
+    ["esp32:D26", "ledGreen:A", "green", []],
+    ["ledGreen:C", "r2:1", "green", []],
+    ["r2:2", "esp32:GND.1", "black", []],
+    ["esp32:D25", "ledYellow:A", "green", []],
+    ["ledYellow:C", "r3:1", "green", []],
+    ["r3:2", "esp32:GND.1", "black", []],
+    ["esp32:D13", "ledStatus:A", "blue", []],
+    ["ledStatus:C", "r4:1", "green", []],
+    ["r4:2", "esp32:GND.1", "black", []]
   ],
   "dependencies": {}
 }
